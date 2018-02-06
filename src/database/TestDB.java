@@ -5,13 +5,17 @@
  */
 package database;
 
+import databag.Fiets;
 import databag.Lid;
 import datatype.Geslacht;
 import datatype.Rijksregisternummer;
+import datatype.Standplaats;
+import datatype.Status;
 import exception.ApplicationException;
 import exception.DBException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  *
@@ -24,10 +28,17 @@ public class TestDB {
      */
     public static void main(String[] args) throws DBException  {
         // TODO code application logic here
+            // opmaak lid objecten
             Lid lid = new Lid();
             LidDB liddb = new LidDB();
-            Removal remove = new Removal();
             
+            //opmaak fiets objecten
+            Fiets fiets = new Fiets();
+            FietsDB fietsdb = new FietsDB();
+            
+            Removal remove = new Removal();
+         
+        // LID TESTEN
         try{
             Rijksregisternummer r = new Rijksregisternummer("99121200156");
             lid.setNaam("Mike");
@@ -88,6 +99,30 @@ public class TestDB {
         } catch (ApplicationException ex) {
             System.out.println("Deze fout trad op (application): " + ex.getMessage());
         }
+        
+        // FIETS TESTEN
+        try{
+            fiets.setRegistratienummer(2);
+            fiets.setStatus(Status.actief);
+            fiets.setStandplaats(Standplaats.Tielt);
+            fiets.setOpmerking("nieuwe fiets");
+            fietsdb.toevoegenFiets(fiets);
+        }
+        catch(DBException ex)
+        {
+            System.out.println("Deze fout trad op: " + ex.getMessage());
+        } 
+        
+        try{
+            Fiets fietsTest = fietsdb.zoekFiets(2);
+            System.out.println(fietsTest.toString());
+        }
+        catch(DBException ex)
+        {
+            System.out.println("Deze fout trad op: " + ex.getMessage());
+        } 
+        
+        
         finally
         {
             remove.verwijderenLid("99121200156");
