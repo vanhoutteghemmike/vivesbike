@@ -128,6 +128,8 @@ public class TestDB {
             remove.verwijderenLid("99121200156");
             System.out.println("Lid succesvol verwijderd!");
         }
+        
+        //RIT TESTEN (ook een test)
     }
     
 }
