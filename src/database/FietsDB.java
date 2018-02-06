@@ -55,7 +55,7 @@ public class FietsDB implements InterfaceFietsDB {
                         + "- statement" + sqlEx);
             }
         }
-        return null;
+        return null; // Statement was verandert naar void maar moet in integer, wat teruggeven?
     }
 
     
@@ -115,7 +115,7 @@ public class FietsDB implements InterfaceFietsDB {
                                 fiets.setOpmerking(r.getString("opmerkingen"));
                                 returnFiets = fiets;
                             }
-                            return returnFiets;
+                            return returnFiets; // geeft geen fiets terug in de TestDB?
                     } catch (SQLException sqlEx) {
                         throw new DBException("SQL-exception in zoekFiets - resultset" + sqlEx);
                     }
